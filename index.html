@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Famous Sweets & Bakers — 3D Interactive Walkthrough</title>
+  <meta name="description" content="Immerse yourself in Famous Sweets & Bakers. Explore our artisanal bakery, royal mithai boutique, and luxury executive lounge through a 3D scroll-driven virtual experience.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="top-bar">
+    <div class="top-bar-inner">
+      <span class="pulse-badge">NOW OPEN</span>
+      <p>Experience the New Architectural & Gourmet Boutique • GST: <strong>09AAAHFF6315J1Z9</strong></p>
+      <a href="tel:+919219482449" class="top-phone">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        +91 9219482449
+      </a>
+    </div>
+  </aside>
+
+  <!-- Sticky Luxury Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <a href="#hero" class="brand-logo" aria-label="Famous Sweets and Bakers Homepage">
+        <div class="logo-crown">
+          <svg viewBox="0 0 36 24" fill="currentColor">
+            <path d="M18 0L23 10L32 3L28 24H8L4 3L13 10L18 0Z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">famous</span>
+          <span class="brand-sub">SWEETS & BAKERS</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#tourSection" class="nav-item active">3D Virtual Tour</a>
+        <a href="#experiences" class="nav-item">The Spaces</a>
+        <a href="#menuSection" class="nav-item">Gourmet Menu</a>
+        <a href="#storySection" class="nav-item">Our Craft</a>
+        <a href="#contactSection" class="nav-item">Visit & Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="cart-btn" id="openCartBtn" aria-label="View Order Bag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="gold-cta-btn" id="bookTableBtn">
+          <span>Book Experience</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Scrollable Hero / 3D Walkthrough Stage -->
+  <main>
+    <section class="tour-track" id="tourTrack">
+      <div class="sticky-viewport">
+        <!-- Canvas for 192 Video Frames -->
+        <canvas id="walkthroughCanvas" aria-label="Interactive 3D Walkthrough of Famous Sweets and Bakers"></canvas>
+        <div class="canvas-vignette"></div>
+
+        <!-- Preloader Screen -->
+        <div class="loader-overlay" id="loaderOverlay">
+          <div class="loader-content">
+            <div class="loader-logo">
+              <svg viewBox="0 0 36 24" fill="currentColor">
+                <path d="M18 0L23 10L32 3L28 24H8L4 3L13 10L18 0Z"/>
+              </svg>
+            </div>
+            <h2 class="loader-title">FAMOUS SWEETS & BAKERS</h2>
+            <p class="loader-sub">Preparing 3D Architectural Walkthrough Experience</p>
+            <div class="loader-bar-outer">
+              <div class="loader-bar-inner" id="loaderFill"></div>
+            </div>
+            <div class="loader-stats">
+              <span id="loaderPercent">0%</span>
+              <span id="loaderCount">0 / 192 Frames</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Story Stages (Sync with Scroll progress) -->
+        <div class="story-stage active" id="storyStage1" data-range="0,0.24">
+          <div class="story-badge">CHAPTER 01 • THE ENTRANCE</div>
+          <h1 class="story-heading">Grand Architectural Facade</h1>
+          <p class="story-desc">Where timeless North Indian culinary legacy meets state-of-the-art modernist facade design. Step across our pristine marble threshold into an sensory haven.</p>
+          <div class="story-highlights">
+            <div class="highlight-chip">✨ Iconic Glass Frontage</div>
+            <div class="highlight-chip">📍 Prime Destination</div>
+          </div>
+        </div>
+
+        <div class="story-stage" id="storyStage2" data-range="0.25,0.52">
+          <div class="story-badge">CHAPTER 02 • THE SWEET EMPORIUM</div>
+          <h2 class="story-heading">Royal Confectionery Boutique</h2>
+          <p class="story-desc">Discover tiered cases of 100% pure desi ghee mithai, silver leaf Kaju Katli, pistachio burfi, and handcrafted celebration gift packs infused with pure Iranian saffron.</p>
+          <div class="story-highlights">
+            <div class="highlight-chip">🍯 100% Pure Desi Ghee</div>
+            <div class="highlight-chip">👑 Heritage Recipes</div>
+          </div>
+        </div>
+
+        <div class="story-stage" id="storyStage3" data-range="0.53,0.78">
+          <div class="story-badge">CHAPTER 03 • ARTISANAL PATISSERIE</div>
+          <h2 class="story-heading">The Oven & European Bakery</h2>
+          <p class="story-desc">Freshly baked viennoiseries, buttery croissants, rustic sourdoughs, and bespoke Belgian chocolate gateaux made fresh every single morning by master pastry chefs.</p>
+          <div class="story-highlights">
+            <div class="highlight-chip">🥐 French Butter Croissants</div>
+            <div class="highlight-chip">🎂 Custom Celebration Cakes</div>
+          </div>
+        </div>
+
+        <div class="story-stage" id="storyStage4" data-range="0.79,1.00">
+          <div class="story-badge">CHAPTER 04 • EXECUTIVE STUDIO</div>
+          <h2 class="story-heading">Private Lounge & Grooming Suite</h2>
+          <p class="story-desc">A one-of-a-kind bespoke grooming and relaxation sanctuary. Illuminated arched mirrors, vintage cognac leather chairs, acoustic fluted timber walls, and chandelier luxury.</p>
+          <div class="story-highlights">
+            <div class="highlight-chip">🛋️ VIP Lounge Experience</div>
+            <div class="highlight-chip">✂️ Bespoke Grooming</div>
+          </div>
+        </div>
+
+
+        <!-- Scroll Down Cue -->
+        <div class="scroll-cue" id="scrollCue">
+          <div class="mouse-icon">
+            <div class="mouse-wheel"></div>
+          </div>
+          <span>Scroll to walk inside</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 3 Spaces Overview Section -->
+    <section class="section experiences-section" id="experiences">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">AN UNPARALLELED DESTINATION</span>
+          <h2 class="section-title">One Landmark. Three Distinct Worlds.</h2>
+          <p class="section-subtitle">Crafted with obsessive precision to delight your senses from morning breakfast to evening celebrations.</p>
+        </div>
+
+        <div class="experiences-grid">
+          <!-- Card 1: Royal Sweets -->
+          <article class="exp-card">
+            <div class="exp-img-wrap">
+              <img src="assets/sweets_box.jpg" alt="Famous Royal Sweets Gift Box" loading="lazy">
+              <span class="exp-badge">Royal Heritage</span>
+            </div>
+            <div class="exp-content">
+              <h3>Traditional Royal Mithai</h3>
+              <p>Hand-kneaded with 100% pure Bikaneri desi ghee, Kashmiri saffron, and Afghani pistachios. Packaged in ornate royal keepsake boxes.</p>
+              <ul class="exp-points">
+                <li>✦ Kaju Katli, Moti Pak & Milk Cakes</li>
+                <li>✦ Zero artificial flavors or adulteration</li>
+                <li>✦ Festive & Wedding customized gift hampers</li>
+              </ul>
+              <a href="#menuSection" class="exp-link" data-filter="sweets">Explore Sweets Collection →</a>
+            </div>
+          </article>
+
+          <!-- Card 2: Artisan Bakery -->
+          <article class="exp-card">
+            <div class="exp-img-wrap">
+              <img src="assets/artisan_breads.jpg" alt="Freshly baked artisan croissants and breads" loading="lazy">
+              <span class="exp-badge">Boulangerie & Oven</span>
+            </div>
+            <div class="exp-content">
+              <h3>Artisanal Bakes & Viennoiserie</h3>
+              <p>Old-world European baking techniques meet contemporary cravings. 72-hour slow fermented sourdoughs and flaky golden viennoiseries.</p>
+              <ul class="exp-points">
+                <li>✦ Flaky Butter Croissants & Pain au Chocolat</li>
+                <li>✦ Artisanal Multigrain & Rustic Sourdough</li>
+                <li>✦ Fresh savory puff pastries & snack bites</li>
+              </ul>
+              <a href="#menuSection" class="exp-link" data-filter="bakery">Explore Bakery Menu →</a>
+            </div>
+          </article>
+
+          <!-- Card 3: Patisserie & Cakes -->
+          <article class="exp-card">
+            <div class="exp-img-wrap">
+              <img src="assets/patisserie_cake.jpg" alt="Belgian chocolate raspberry celebration cake" loading="lazy">
+              <span class="exp-badge">Signature Patisserie</span>
+            </div>
+            <div class="exp-content">
+              <h3>Luxury Cakes & Gateaux</h3>
+              <p>Indulgent dark chocolate ganache, seasonal fresh fruit tarts, macarons, and bespoke multi-tier designer celebration cakes for your milestones.</p>
+              <ul class="exp-points">
+                <li>✦ Belgian Dark Chocolate Truffle & Hazelnut</li>
+                <li>✦ Gold leaf, fresh berry & floral garnishes</li>
+                <li>✦ Same-day custom celebration cake delivery</li>
+              </ul>
+              <a href="#menuSection" class="exp-link" data-filter="cakes">View Designer Cakes →</a>
+            </div>
+          </article>
+
+          <!-- Card 4: Executive Lounge -->
+          <article class="exp-card highlight-lounge">
+            <div class="exp-img-wrap">
+              <img src="assets/grooming_lounge.jpg" alt="Executive Grooming Salon and Lounge Suite" loading="lazy">
+              <span class="exp-badge gold">Exclusive Amenity</span>
+            </div>
+            <div class="exp-content">
+              <h3>The Executive Salon & Lounge</h3>
+              <p>Step through our private gallery into an exclusive grooming studio. Enjoy artisanal refreshments while receiving bespoke styling treatments.</p>
+              <ul class="exp-points">
+                <li>✦ Private VIP styling and grooming stations</li>
+                <li>✦ Chandelier ambience with acoustic wood panels</li>
+                <li>✦ Complimentary hot gourmet brew & confections</li>
+              </ul>
+              <button class="exp-link book-lounge-trigger">Book Studio Appointment →</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Gourmet Menu Section -->
+    <section class="section menu-section" id="menuSection">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">CURATED TASTING MENU</span>
+          <h2 class="section-title">The Master Collection</h2>
+          <p class="section-subtitle">Select your favorite delicacies to order directly or curate a bespoke luxury gift box.</p>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="filter-tabs" id="menuFilters">
+          <button class="filter-btn active" data-category="all">All Specialties</button>
+          <button class="filter-btn" data-category="sweets">Royal Mithai</button>
+          <button class="filter-btn" data-category="bakery">Artisan Bakery</button>
+          <button class="filter-btn" data-category="cakes">Designer Cakes</button>
+          <button class="filter-btn" data-category="savory">Savory & Bites</button>
+        </div>
+
+        <!-- Menu Products Grid -->
+        <div class="menu-grid" id="menuGrid">
+          <!-- Item 1 -->
+          <div class="menu-item-card" data-cat="sweets">
+            <div class="item-badge-pill">Heritage Classic</div>
+            <div class="item-img-holder">
+              <img src="assets/sweets_box.jpg" alt="Shahi Kaju Katli Box" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>Shahi Kaju Katli (500g)</h4>
+                <span class="item-price">₹650</span>
+              </div>
+              <p class="item-desc">Premium Goan cashews, edible 99.9% silver leaf, and cardamom essence with silky smooth melt-in-mouth texture.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> 100% Pure Ghee</span>
+                <button class="add-to-bag-btn" data-id="1" data-name="Shahi Kaju Katli (500g)" data-price="650">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="menu-item-card" data-cat="sweets">
+            <div class="item-badge-pill">Bestseller</div>
+            <div class="item-img-holder">
+              <img src="assets/sweets_box.jpg" alt="Zafrani Peda & Pistachio Burfi" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>Royal Zafrani Peda Box</h4>
+                <span class="item-price">₹580</span>
+              </div>
+              <p class="item-desc">Slow-reduced whole milk mawa steeped in fragrant Kashmiri saffron strands and crushed green cardamom.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> Saffron Infused</span>
+                <button class="add-to-bag-btn" data-id="2" data-name="Royal Zafrani Peda Box" data-price="580">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="menu-item-card" data-cat="bakery">
+            <div class="item-badge-pill">Fresh Daily</div>
+            <div class="item-img-holder">
+              <img src="assets/artisan_breads.jpg" alt="Golden French Croissants" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>Pure Butter French Croissants (Pack of 3)</h4>
+                <span class="item-price">₹360</span>
+              </div>
+              <p class="item-desc">27 delicate laminated butter layers with a honeycomb interior, crisp golden crust, baked fresh every 4 hours.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> Normandy Butter</span>
+                <button class="add-to-bag-btn" data-id="3" data-name="French Croissants (Pack of 3)" data-price="360">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="menu-item-card" data-cat="bakery">
+            <div class="item-badge-pill">Artisan Craft</div>
+            <div class="item-img-holder">
+              <img src="assets/artisan_breads.jpg" alt="Stoneground Sourdough Loaf" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>Country Sourdough Boule</h4>
+                <span class="item-price">₹240</span>
+              </div>
+              <p class="item-desc">Naturally wild fermented with live levain for 48 hours. Blistered caramelized crust and open airy crumb.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> Zero Yeast</span>
+                <button class="add-to-bag-btn" data-id="4" data-name="Country Sourdough Boule" data-price="240">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="menu-item-card" data-cat="cakes">
+            <div class="item-badge-pill">Signature Gateau</div>
+            <div class="item-img-holder">
+              <img src="assets/patisserie_cake.jpg" alt="Belgian Dark Truffle Cake" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>Belgian Dark Truffle Cake (1kg)</h4>
+                <span class="item-price">₹1,450</span>
+              </div>
+              <p class="item-desc">70% Callebaut dark cocoa sponge, silky chocolate ganache glaze, French macarons, and 24K edible gold flakes.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> Pure Belgian Chocolate</span>
+                <button class="add-to-bag-btn" data-id="5" data-name="Belgian Dark Truffle Cake (1kg)" data-price="1450">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="menu-item-card" data-cat="cakes">
+            <div class="item-badge-pill">Chef's Choice</div>
+            <div class="item-img-holder">
+              <img src="assets/patisserie_cake.jpg" alt="Raspberry Rose Macaron Cake" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>Raspberry Rose Mousse Gateau (1kg)</h4>
+                <span class="item-price">₹1,600</span>
+              </div>
+              <p class="item-desc">Velvety raspberry coulis center, white chocolate rose mousse, almond joconde, and fresh berry cascade.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> Eggless Available</span>
+                <button class="add-to-bag-btn" data-id="6" data-name="Raspberry Rose Mousse Gateau (1kg)" data-price="1600">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="menu-item-card" data-cat="savory">
+            <div class="item-badge-pill">Gourmet Snack</div>
+            <div class="item-img-holder">
+              <img src="assets/artisan_breads.jpg" alt="Paneer Tikka Puff" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>Smoked Paneer Tikka Puff (2 Pcs)</h4>
+                <span class="item-price">₹180</span>
+              </div>
+              <p class="item-desc">Charcoal-smoked cottage cheese in tandoori spices wrapped in a crisp, multi-layered golden puff pastry.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> Hot & Crispy</span>
+                <button class="add-to-bag-btn" data-id="7" data-name="Smoked Paneer Tikka Puff (2 Pcs)" data-price="180">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="menu-item-card" data-cat="sweets">
+            <div class="item-badge-pill">Royal Gifting</div>
+            <div class="item-img-holder">
+              <img src="assets/sweets_box.jpg" alt="Signature Emperor Hampers" loading="lazy">
+            </div>
+            <div class="item-body">
+              <div class="item-title-row">
+                <h4>The Emperor Keepsake Mithai Box</h4>
+                <span class="item-price">₹1,850</span>
+              </div>
+              <p class="item-desc">Handcrafted golden velvet chest packed with 4 royal varieties: Kaju Katli, Pista Lauj, Dry Fruit Ladoo, and Zafrani Barfi.</p>
+              <div class="item-footer">
+                <span class="veg-badge"><span class="veg-dot"></span> Keepsake Velvet Box</span>
+                <button class="add-to-bag-btn" data-id="8" data-name="The Emperor Keepsake Mithai Box" data-price="1850">
+                  + Add to Order
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Famous / Our Craft Section -->
+    <section class="section craft-section" id="storySection">
+      <div class="container">
+        <div class="craft-grid">
+          <div class="craft-content">
+            <span class="section-tag">UNCOMPROMISING PURITY</span>
+            <h2 class="section-title">Rooted in Tradition. Elevated by Design.</h2>
+            <p class="craft-lead">Famous Sweets & Bakers has redefined the confectionery and bakery experience into a multi-sensory journey.</p>
+            
+            <div class="craft-pillars">
+              <div class="pillar-item">
+                <div class="pillar-num">01</div>
+                <div>
+                  <h4>100% Desi Ghee & Fresh Milk</h4>
+                  <p>We source only unadulterated pure cow and buffalo desi ghee, rich fresh milk, and whole nuts for unforgettable authentic richness.</p>
+                </div>
+              </div>
+
+              <div class="pillar-item">
+                <div class="pillar-num">02</div>
+                <div>
+                  <h4>European Oven Mastery</h4>
+                  <p>Our stone-hearth ovens bake sourdoughs and French viennoiseries with meticulous moisture control and precision heat balance.</p>
+                </div>
+              </div>
+
+              <div class="pillar-item">
+                <div class="pillar-num">03</div>
+                <div>
+                  <h4>Luxury Architectural Space</h4>
+                  <p>A flagship establishment designed with rich fluted oak, brass accents, marble floors, and an exclusive executive styling lounge.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="craft-stats-row">
+              <div class="stat-box">
+                <span class="stat-number">40+</span>
+                <span class="stat-label">Years of Mastery</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number">120+</span>
+                <span class="stat-label">Daily Fresh Creations</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number">4.9★</span>
+                <span class="stat-label">Google Rating</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="craft-visual watch-interactive-container" id="watchVisualContainer">
+            <div class="watch-canvas-card">
+              <canvas id="watchExplosionCanvas" aria-label="3D Chronograph Watch Explosion Walkthrough"></canvas>
+              
+
+              <div class="watch-progress-track">
+                <div class="watch-progress-fill" id="watchProgressFill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservation & Order Inquiry Section -->
+    <section class="section contact-section" id="contactSection">
+      <div class="container">
+        <div class="contact-card-wrapper">
+          <div class="contact-info-col">
+            <span class="section-tag light">VISIT & EXPERIENCE</span>
+            <h2 class="contact-title">Step Inside Famous Sweets & Bakers</h2>
+            <p class="contact-desc">We invite you to experience our architectural store, taste freshly pulled confections, or reserve an executive lounge session.</p>
+
+            <div class="info-blocks">
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div>
+                  <h5>Location</h5>
+                  <p>Famous Sweets & Bakers Flagship Store<br>GST NO: <strong>09AAAHFF6315J1Z9</strong></p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div>
+                  <h5>Direct Inquiries & Phone Orders</h5>
+                  <p><a href="tel:+919219482449" class="phone-link">+91 9219482449</a><br><small>Available 8:00 AM – 11:00 PM Daily</small></p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                  <h5>Operating Hours</h5>
+                  <p>Monday – Sunday: <strong>8:00 AM – 11:00 PM</strong><br>Fresh bakery batches baked every morning at 7:30 AM.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="direct-call-action">
+              <a href="tel:+919219482449" class="call-btn-large">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span>Call Store Directly: +91 9219482449</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Reservation / Order Form -->
+          <div class="contact-form-col">
+            <div class="form-header">
+              <h3>Direct Order & Reservation</h3>
+              <p>Reserve an experience table, book a VIP grooming session, or request customized bulk event sweets.</p>
+            </div>
+
+            <form class="booking-form" id="mainBookingForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="bookName">Full Name *</label>
+                  <input type="text" id="bookName" name="name" placeholder="e.g. Vikram Sharma" required>
+                </div>
+                <div class="form-group">
+                  <label for="bookPhone">Contact Number *</label>
+                  <input type="tel" id="bookPhone" name="phone" placeholder="+91 98765 43210" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="bookType">Experience / Order Type</label>
+                  <select id="bookType" name="type">
+                    <option value="luxury_sweets">Royal Mithai Gift Hampers Order</option>
+                    <option value="bakery_cakes">Custom Designer Cake Order</option>
+                    <option value="lounge_session">Executive Salon & Lounge Booking</option>
+                    <option value="event_catering">Wedding / Corporate Catering Inquiry</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="bookDate">Preferred Date</label>
+                  <input type="date" id="bookDate" name="date">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bookMessage">Special Requests / Quantities / Flavour Notes</label>
+                <textarea id="bookMessage" name="message" rows="3" placeholder="Tell us your requirements (e.g. 15kg Shahi Kaju Katli boxes with custom logo ribbon or 2pm salon appointment)..."></textarea>
+              </div>
+
+              <button type="submit" class="submit-gold-btn" id="submitBookingBtn">
+                <span>Confirm & Send Inquiry</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Luxury Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg viewBox="0 0 36 24" fill="currentColor">
+              <path d="M18 0L23 10L32 3L28 24H8L4 3L13 10L18 0Z"/>
+            </svg>
+            <span>famous</span>
+          </div>
+          <p class="footer-tagline">SWEETS & BAKERS</p>
+          <p class="footer-about">An architectural landmark uniting traditional royal confections, European stone-oven baking, and an exclusive executive pampering lounge.</p>
+          <div class="footer-badges">
+            <span class="badge-chip">GST: 09AAAHFF6315J1Z9</span>
+            <span class="badge-chip">FSSAI Certified</span>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Experience Tour</h5>
+          <ul>
+            <li><a href="#tourTrack" class="jump-tour" data-frame="1">The Grand Facade</a></li>
+            <li><a href="#tourTrack" class="jump-tour" data-frame="64">Royal Sweet Boutique</a></li>
+            <li><a href="#tourTrack" class="jump-tour" data-frame="128">Artisan Bakery & Oven</a></li>
+            <li><a href="#tourTrack" class="jump-tour" data-frame="192">Executive Grooming Suite</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Gourmet Menu</h5>
+          <ul>
+            <li><a href="#menuSection">Royal Shahi Mithai</a></li>
+            <li><a href="#menuSection">European Viennoiserie</a></li>
+            <li><a href="#menuSection">Bespoke Celebration Cakes</a></li>
+            <li><a href="#menuSection">Savory Tandoori Puffs</a></li>
+            <li><a href="#menuSection">Corporate Gift Hampers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Direct Contact</h5>
+          <p class="footer-phone-highlight">
+            <a href="tel:+919219482449">+91 9219482449</a>
+          </p>
+          <p class="footer-hours">Daily: 8:00 AM – 11:00 PM</p>
+          <p class="footer-legal">Complies with all FSSAI food quality and GST compliance benchmarks.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Famous Sweets & Bakers. All Rights Reserved. • GSTIN: 09AAAHFF6315J1Z9</p>
+        <div class="footer-credits">
+          <span>Crafted with 3D Video Walkthrough Architecture</span>
+          <a href="#siteHeader" class="back-to-top" id="backToTop">
+            Back to Top ↑
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-out Shopping / Order Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay">
+    <div class="cart-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <h3>Your Gourmet Selection</h3>
+        </div>
+        <button class="drawer-close" id="closeCartBtn" aria-label="Close Order Drawer">×</button>
+      </div>
+
+      <div class="drawer-body" id="cartItemList">
+        <div class="empty-cart-state" id="emptyCart">
+          <div class="empty-icon">🍰</div>
+          <p>Your bag is currently empty.</p>
+          <span>Select any delicacy from our menu to begin your order.</span>
+        </div>
+      </div>
+
+      <div class="drawer-footer" id="cartFooter" style="display: none;">
+        <div class="cart-subtotal">
+          <span>Estimated Total:</span>
+          <span class="total-amount" id="cartTotalDisplay">₹0</span>
+        </div>
+        <button class="checkout-btn" id="proceedCheckoutBtn">
+          <span>Proceed to Order Confirmation</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn">×</button>
+      <div class="modal-body">
+        <div class="modal-gold-crown">👑</div>
+        <h3 id="modalHeading">Reserve Your Experience</h3>
+        <p id="modalSubtext">Book an executive grooming session or reserve a VIP tasting table at Famous Sweets & Bakers.</p>
+
+        <form id="modalForm" class="modal-form">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="mName" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="mPhone" placeholder="+91 9219482449" required>
+          </div>
+          <div class="form-group">
+            <label>Service / Occasion</label>
+            <select id="mService">
+              <option value="VIP Tasting Table">VIP Tasting Table Experience</option>
+              <option value="Executive Salon & Grooming">Executive Salon & Grooming Suite</option>
+              <option value="Custom Cake Consultation">Custom Cake Consultation</option>
+              <option value="Wedding Gift Inquiry">Wedding Gift Hamper Inquiry</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-gold-btn">
+            <span>Confirm Reservation</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Floating Toast Notification -->
+  <div class="toast-notification" id="toastNotice" role="alert">
+    <div class="toast-icon">✓</div>
+    <div class="toast-text">
+      <strong id="toastTitle">Order Received</strong>
+      <p id="toastMessage">We will contact you promptly at +91 9219482449.</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
